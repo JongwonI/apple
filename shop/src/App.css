@@ -1,0 +1,69 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: '나눔바른고딕';
+}
+.temp{
+    margin-top: 75px;
+}
+.NavBar{
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: #fff;
+}
+.NavBtn{
+    margin-left: 30px;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+}
+.mainBox{
+    width: 80%;
+    height: auto;
+    padding: 50px 0;
+    border: #333 solid 4px;
+    border-radius: 15px;
+    margin: 100px auto 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.mainBox > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    border-right: #333 4px dashed;
+}
+.mainBox > div:last-of-type{
+    border: none;
+}
+.mainBox > div > img{
+    width: 80%;
+}
+.EventBox{
+    width: 250px;
+    border-radius: 15px;
+    border: 2px #333 solid;
+    margin: 100px auto 0;
+    padding: 20px 0;
+    text-align: center;
+}
+.EventBtn{
+    border: #333 2px solid;
+    padding: 5px;
+    background-color: transparent;
+    margin: 10px;
+}
+
+.container{
+    margin-top: 50px;
+}
