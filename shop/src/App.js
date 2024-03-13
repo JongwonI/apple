@@ -21,12 +21,12 @@ function App() {
             <Routes>
                 <Route path='/' element={<Main shoesInfo = {shoesInfo} />}/>
                 <Route path='/detail/:userPar' element={<Detail shoesInfo={shoesInfo}/>}></Route>
-                <Route path='/about' element={<div className = 'temp' > dddd</div>}/>
+                <Route path='/about' element={<div className = 'temp' >어바웃</div>}/>
                 <Route path='/event' element={<Event navigate={navigate}/>}>
                   <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>}/>
-                  <Route path='two' element={<div>생일기념 쿠폰받기</div>}/>
+                  <Route path='two' element={<div>생일기념 쿠폰</div>}/>
                 </Route>
-                <Route path='*' element={<div className='temp'>오타났슈</div>}/>
+                <Route path='*' element={<div className='temp'>오타났어유</div>}/>
             </Routes>
         </div>
     );
