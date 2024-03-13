@@ -4,11 +4,12 @@ import shoesData from './data';
 import {Routes, Route, Link, useNavigate, Outlet, Navigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Detail,ShoeList} from './detail';
+import axios from 'axios';
 
 function App() {
     const [shoesInfo, InfoSet] = useState(shoesData);
     const navigate = useNavigate();
-
+    const [MoreNum, MoreSet] = useState(0);
 
     return (
         <div className="App">
@@ -19,7 +20,7 @@ function App() {
                 <div onClick={()=>{navigate('/event')}} to={'/event'} className='NavBtn eventNav'>event</div>
             </div>
             <Routes>
-                <Route path='/' element={<Main shoesInfo = {shoesInfo} />}/>
+                <Route path='/' element={<Main shoesInfo = {shoesInfo} InfoSet={InfoSet} MoreNum={MoreNum} MoreSet={MoreSet} />}/>
                 <Route path='/detail' element={<ShoeList shoesInfo={shoesInfo}/>} />
                 <Route path='/detail/:userPar' element={<Detail shoesInfo={shoesInfo} navigate={navigate}/>}></Route>
                 <Route path='/about' element={<div className = 'temp' >어바웃</div>}/>
@@ -34,16 +35,43 @@ function App() {
 }
 
 function Main(props) {
-    return (
 
+    return (
+        <>
         <div className='mainBox'>
             {props.shoesInfo.map((a, i) => {
-                        return (
-                        <Card shoesInfo={props.shoesInfo[i]} i={i}/>
-                        )
-                    })
+                return (
+                    <Card shoesInfo={props.shoesInfo[i]}/>
+                    )
+                })
             }
         </div>
+        <button className='MoreBtn' onClick={()=>{
+            if(props.MoreNum == 0){
+                axios.get('https://codingapple1.github.io/shop/data2.json')
+            .then((data)=>{
+                let tempShoe = [...props.shoesInfo,...data.data]
+                props.InfoSet(tempShoe);
+                props.MoreSet(1);
+            })
+            .catch(()=>{
+                console.log('실패');
+            })
+            }else if(props.MoreNum == 1){
+                axios.get('https://codingapple1.github.io/shop/data3.json')
+            .then((data)=>{
+                let tempShoe = [...props.shoesInfo,...data.data]
+                props.InfoSet(tempShoe);
+                document.querySelector('.MoreBtn').classList.add('hide')
+                props.MoreSet(2);
+            })
+            .catch(()=>{
+                console.log('실패');
+            })
+            }
+            
+        }}>더 보기</button>
+         </>
 
     )
 }
@@ -62,7 +90,7 @@ function Event(props){
 function Card(props) {
     return (
         <div className='Shoes'>
-            <img src={process.env.PUBLIC_URL + `/shoes${props.i + 1}.jpg`}/>
+            <img src={process.env.PUBLIC_URL + `/shoes${props.shoesInfo.id + 1}.jpg`}/>
             <h4>{props.shoesInfo.title}</h4>
             <p>{props.shoesInfo.price}</p>
         </div>
