@@ -3,7 +3,7 @@ import './App.css';
 import shoesData from './data';
 import {Routes, Route, Link, useNavigate, Outlet, Navigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Detail from './detail';
+import {Detail,ShoeList} from './detail';
 
 function App() {
     const [shoesInfo, InfoSet] = useState(shoesData);
@@ -20,7 +20,8 @@ function App() {
             </div>
             <Routes>
                 <Route path='/' element={<Main shoesInfo = {shoesInfo} />}/>
-                <Route path='/detail/:userPar' element={<Detail shoesInfo={shoesInfo}/>}></Route>
+                <Route path='/detail' element={<ShoeList shoesInfo={shoesInfo}/>} />
+                <Route path='/detail/:userPar' element={<Detail shoesInfo={shoesInfo} navigate={navigate}/>}></Route>
                 <Route path='/about' element={<div className = 'temp' >어바웃</div>}/>
                 <Route path='/event' element={<Event navigate={navigate}/>}>
                   <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>}/>
@@ -36,11 +37,10 @@ function Main(props) {
     return (
 
         <div className='mainBox'>
-            {
-                props
-                    .shoesInfo
-                    .map((a, i) => {
-                        return (<Card shoesInfo={props.shoesInfo[i]} i={i}/>)
+            {props.shoesInfo.map((a, i) => {
+                        return (
+                        <Card shoesInfo={props.shoesInfo[i]} i={i}/>
+                        )
                     })
             }
         </div>
