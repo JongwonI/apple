@@ -3,6 +3,7 @@
 }
 body{
     font-family: '나눔바른고딕';
+    padding-top: 75px;
 }
 .temp{
     margin-top: 75px;
@@ -97,7 +98,4 @@ body{
 .scale0.scale1{
     transform: scale(1);
     transition: all 0.5s;
-}
-.table{
-    margin-top: 50px;
 }

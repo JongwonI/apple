@@ -1,35 +1,45 @@
-import {Table} from 'react-bootstrap';
-import {useSelector} from 'react-redux'
+import {Table} from 'react-bootstrap'
+import {useDispatch, useSelector} from 'react-redux'
+import {StockSet,userSet} from './store'
+
 function Cart(){
 
-    let a = useSelector((state)=>{return state})
-    console.log(a.stock)
+    let state = useSelector((state)=>{return state})
+    let dispatch = useDispatch()
     return(
-        <Table>
-            <thead>
-                <tr>
-                <th>#</th>
-                <th>상품명</th>
-                <th>수량</th>
-                <th>변경하기</th>
-                </tr>
-            </thead>
-            {
-                a.stock.map((b,i)=>{
-                    return (
-                <tbody>
+        <>
+            {state.user.name}({state.user.age}세)의 장바구니
+            <button onClick={()=>{
+                 dispatch(userSet())
+            }}>+</button>
+            <Table>
+                <thead>
                     <tr>
-                    <td>{i}</td>
-                    <td>{b.name}</td>
-                    <td>{b.count}</td>
-                    <td></td>
+                    <th>#</th>
+                    <th>상품명</th>
+                    <th>수량</th>
+                    <th>변경하기</th>
                     </tr>
-                </tbody>
-                    )
-                })
-            }
-            
-        </Table> 
+                </thead>
+                {
+                    state.stock.map((a,i)=>{
+                        return (
+                    <tbody>
+                        <tr>
+                        <td>{i}</td>
+                        <td>{a.name}</td>
+                        <td>{a.count}</td>
+                        <td><button onClick={()=>{
+                            dispatch(StockSet())
+                        }}>+</button></td>
+                        </tr>
+                    </tbody>
+                        )
+                    })
+                }
+                
+            </Table> 
+        </>
     )
 }
 
