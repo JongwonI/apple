@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
 import styled from 'styled-components';
+import {Nav, Tab} from 'react-bootstrap';
 
 
 
@@ -16,11 +17,16 @@ let Btn =styled.button`
     transform : translate(-50%,-50%);
 `
 function Detail(props) {
+    let [Tab,SetTab] = useState(0);
     let {userPar} = useParams();
     let navigate = props.navigate;
     userPar = props.shoesInfo[userPar].id;
+    let [scale,Setscale] = useState('');
+    useEffect(()=>{
+        Setscale('scale1')
+    })
     return (
-        <div className="container">
+        <div className={`container scale0 ` + scale}>
             <div className="row">
                 <div className="col-md-6">
                     <img src={process.env.PUBLIC_URL + `/shoes${parseInt(userPar) + 1}.jpg`} width="100%"/>
@@ -33,6 +39,18 @@ function Detail(props) {
                 </div>
             </div>
             <Btn bg={'#333'} onClick={()=>{navigate(-1)}}>《 Back</Btn>
+            <Nav variant="tabs"  defaultActiveKey="link0">
+                <Nav.Item>
+                <Nav.Link eventKey="link0" onClick={function(){SetTab(0)}}>버튼0</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                <Nav.Link eventKey="link1" onClick={function(){SetTab(1)}}>버튼1</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                <Nav.Link eventKey="link2" onClick={function(){SetTab(2)}}>버튼2</Nav.Link>
+                </Nav.Item>
+            </Nav>
+          <TabContent Tab = {Tab}></TabContent>
         </div>
     )
 }
@@ -66,5 +84,28 @@ function ShoeList(props){
        </div>
     )
 }
+function TabContent({Tab}){
+    let [Tabfade,setTabfade] = useState('');
+    useEffect(()=>{
+        let a = setTimeout(() => {setTabfade('end');}, 10);
+        return ()=>{
+            clearTimeout(a);
+            setTabfade('');
+        }
+    },[Tab])
+    if(Tab == 0){
+        return <div className={`start ` + Tabfade}>내용0</div>
+        
+    }else if(Tab == 1){
+        return <div className={`start ` + Tabfade}>내용1</div>
+        
+    }else if(Tab == 2){
+        return <div className={`start ` + Tabfade}>내용2</div>
+        
+    }
+}
+
+
+
 
 export {Detail,ShoeList};

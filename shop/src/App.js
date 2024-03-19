@@ -4,6 +4,7 @@ import shoesData from './data';
 import {Routes, Route, Link, useNavigate, Outlet, Navigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Detail,ShoeList} from './detail';
+import Cart from './cart';
 import axios from 'axios';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                 <div onClick={()=>{navigate('/detail')}} to={'/detail'} className='NavBtn detailNav'>detail</div>
                 <div onClick={()=>{navigate('/about')}} to={'/about'} className='NavBtn aboutNav'>about</div>
                 <div onClick={()=>{navigate('/event')}} to={'/event'} className='NavBtn eventNav'>event</div>
+                <div onClick={()=>{navigate('/cart')}} to={'/cart'} className='NavBtn cartNav'>cart</div>
             </div>
             <Routes>
                 <Route path='/' element={<Main shoesInfo = {shoesInfo} InfoSet={InfoSet} MoreNum={MoreNum} MoreSet={MoreSet} />}/>
@@ -28,6 +30,7 @@ function App() {
                   <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>}/>
                   <Route path='two' element={<div>생일기념 쿠폰</div>}/>
                 </Route>
+                <Route path='/cart' element={<Cart navigate={navigate}/>}></Route>
                 <Route path='*' element={<div className='temp'>오타났어유</div>}/>
             </Routes>
         </div>
