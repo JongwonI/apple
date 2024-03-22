@@ -17,8 +17,12 @@ let stock = createSlice({
         {id : 2, name : 'Grey Yordan', count : 1}
       ] ,
     reducers : {
-        StockSet(state){
-          state[0].count++
+        StockSet(state,action){
+          let addIndex = state.findIndex((a)=>{return a.id === action.payload})
+          state[addIndex].count++
+        },
+        addItem(state,action){
+          state.push(action.payload)
         }
     }
 })
@@ -32,5 +36,5 @@ export default configureStore({
    }
 }) 
 
-export let {StockSet} = stock.actions
+export let {StockSet,addItem} = stock.actions
 export let {userSet} = user.actions

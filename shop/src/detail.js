@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import {useParams} from 'react-router-dom';
+import {json, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 import {Nav, Tab} from 'react-bootstrap';
+import {useDispatch} from 'react-redux'
+import {addItem} from './store';
 
 
 
@@ -22,8 +24,12 @@ function Detail(props) {
     let navigate = props.navigate;
     userPar = props.shoesInfo[userPar].id;
     let [scale,Setscale] = useState('');
+    let dispatch = useDispatch()
     useEffect(()=>{
         Setscale('scale1')
+        let tempData = JSON.parse(localStorage.getItem('watched'))
+        tempData.push(props.shoesInfo[userPar].title)
+        localStorage.setItem('watched',JSON.stringify(tempData))
     })
     return (
         <div className={`container scale0 ` + scale}>
@@ -35,7 +41,9 @@ function Detail(props) {
                     <h4 className="pt-5">{props.shoesInfo[userPar].title}</h4>
                     <p>{props.shoesInfo[userPar].content}</p>
                     <p>{props.shoesInfo[userPar].price}</p>
-                    <button className="btn btn-danger" >주문하기</button>
+                    <button className="btn btn-danger" onClick={()=>{
+                        dispatch(addItem({id:props.shoesInfo[userPar].id,name:props.shoesInfo[userPar].title,count : 1}))
+                    }}>주문하기</button>
                 </div>
             </div>
             <Btn bg={'#333'} onClick={()=>{navigate(-1)}}>《 Back</Btn>

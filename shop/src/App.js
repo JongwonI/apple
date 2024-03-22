@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import './App.css';
 import shoesData from './data';
 import {Routes, Route, Link, useNavigate, Outlet, Navigate} from 'react-router-dom';
@@ -8,6 +8,9 @@ import Cart from './cart';
 import axios from 'axios';
 
 function App() {
+    useEffect(()=>{
+        localStorage.setItem('watched',JSON.stringify([]))
+    }, [])
     const [shoesInfo, InfoSet] = useState(shoesData);
     const navigate = useNavigate();
     const [MoreNum, MoreSet] = useState(0);

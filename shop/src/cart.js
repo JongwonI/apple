@@ -26,11 +26,11 @@ function Cart(){
                         return (
                     <tbody>
                         <tr>
-                        <td>{i}</td>
-                        <td>{a.name}</td>
-                        <td>{a.count}</td>
+                        <td>{state.stock[i].id}</td>
+                        <td>{state.stock[i].name}</td>
+                        <td>{state.stock[i].count}</td>
                         <td><button onClick={()=>{
-                            dispatch(StockSet())
+                            dispatch(StockSet(state.stock[i].id))
                         }}>+</button></td>
                         </tr>
                     </tbody>
