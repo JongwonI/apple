@@ -1,5 +1,10 @@
 *{
     font-family: '나눔바른고딕';
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
 }
 a{
     font-style: normal;
@@ -12,6 +17,7 @@ a{
     background-color: #ccc;
     display: flex;
     align-items: center;
+    
 }
 .nav > a {
     margin-left: 15px;
