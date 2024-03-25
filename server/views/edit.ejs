@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/test.css">
+    <title>Document</title>
+</head>
+<body class="grey-bg">
+    <%- include('nav.ejs') %>
+    <div class="white-bg">
+       <form action="/contentedit" method="POST" class="configBox">
+         <input name="_id" value="<%= result._id %>">
+         <input name="title" value="<%= result.title %>">
+         <input name="content" value="<%= result.content %>">
+         <input type="submit" value="수정">
+       </form>
+    </div> 
+</body>
+</html>
